@@ -1,17 +1,28 @@
 import React, {useState} from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import Config from 'react-native-config';
 import JobCard from '../../components/JobCard';
 import useFetch from '../../hooks/useFetch';
 
-const Jobs = () =>{
-    const [loadMoreButton, setLoadMoreButton]=useState(1);
-    const {data, loading, error}=useFetch(Config.JOBS_API_URL+loadMoreButton);
+const Jobs = ({navigation}) =>{
+    const [page, setPage]=useState(1);
+    const {data, loading, error}=useFetch(Config.JOBS_API_URL+page);
+
+    if(loading){
+        return <ActivityIndicator size={30} />
+    }
+
+    if(error){
+        <Text>{error}</Text>
+    }
+
+    const showDetail = (id, name) =>{
+        navigation.navigate('Detail',{id:id, name:name});
+    }
     
-    const renderJob = ({item}) => <JobCard job={item} />
+    const renderJob = ({item}) => <JobCard job={item} onPressJob={showDetail}/>
     return (
         <View style={styles.container}>
-            <Text>Jobsss</Text>
             <FlatList 
                 data={data.results}
                 renderItem={renderJob}
