@@ -6,12 +6,16 @@ import styles from './JobCard.style';
 import FavIcon from '../FavIcon';
 
 
-const JobCard = ({job,onPressJob}) =>{
+const JobCard = ({job,navigation}) =>{
 
     const favFlag=useSelector(state => state.favList.find(s=>s.id==job.id));
 
+    const showDetail = (id, name) =>{
+        navigation.navigate('Detail',{id:id, name:name});
+    }
+    
     return(
-        <TouchableWithoutFeedback onPress={()=> onPressJob(job.id, job.name)}>
+        <TouchableWithoutFeedback onPress={()=> showDetail(job.id, job.name)}>
             <View style={styles.container}>
                 <View style={styles.header_container}>
                     <Text style={styles.title}>{job.name}</Text>
@@ -23,7 +27,7 @@ const JobCard = ({job,onPressJob}) =>{
                         }
                     </View>
                 </View>
-                <Text style={styles.comp}>{job.company.name}</Text>
+                <Text>{job.company.name}</Text>
                 <View style={styles.area_container}>
                     <Text style={styles.level}>{job.levels[0].name}</Text>
                     {job.locations[0] &&

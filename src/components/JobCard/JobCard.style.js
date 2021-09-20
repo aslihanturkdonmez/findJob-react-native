@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default StyleSheet.create({
     container:{
@@ -8,15 +7,13 @@ export default StyleSheet.create({
         padding:5,
         borderRadius:8,
         backgroundColor:'white',
+        borderColor:'#e0d1dd',
     },
     title:{
         fontWeight:'bold',
         fontSize:18,
         flex:1,
         marginRight:8,
-    },
-    comp:{
-        marginTop:5,
     },
     area:{
         backgroundColor:'#774F9E',
@@ -27,7 +24,6 @@ export default StyleSheet.create({
         fontSize:16,
         color:'white',
         fontWeight:'bold',
-
     },
     level:{
         marginTop:5,

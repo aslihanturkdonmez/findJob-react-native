@@ -3,45 +3,47 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container:{
         flex:1,
-    },
-    header_container:{
-        marginLeft:8,
+        marginHorizontal:5,
+        backgroundColor:'#fff7fd',
     },
     name:{
+        textAlign:'center',
         fontWeight:'bold',
         fontSize:25,
-        marginTop:4,
+        marginBottom:9,
+        marginTop:8,
     },
     loc_title:{
         marginTop:8,
         fontSize:16,
         fontWeight:'bold',
-        color:'red',
+        color:'#774F9E',
     },
     location:{
         color:'black',
+        fontWeight:'400',
     },
     level_title:{
         marginTop:8,
         fontSize:16,
         fontWeight:'bold',
-        color:'red',
+        color:'#774F9E',
     },
     level:{
         color:'black',
+        fontWeight:'400',
     },
     content_title:{
-        marginTop:4,
-        textAlign:'center',
         fontWeight:'bold',
-        fontSize:20,
+        fontSize:23,
+        backgroundColor:'white',
+        textAlign:'center',
     },
     scroll:{
         backgroundColor:'white',
-        marginTop:15,
         padding:10,
-        borderWidth:1,
-        margin:3,
+        borderRadius:7,
+        marginTop:20,
     },
     button_container:{
         flexDirection:'row',
@@ -50,13 +52,14 @@ export default StyleSheet.create({
     },
     button_text:{
         fontSize:22,
-        marginLeft:5,
+        marginLeft:12,
+        color:'#ffdef9',
     },
     button:{
         flex:1,
         padding:8,
         borderRadius:8,
-        backgroundColor:'#E4A3AD',
+        backgroundColor:'#774F9E',
         flexDirection:'row',
         margin:5,
         justifyContent:'center',
@@ -64,7 +67,7 @@ export default StyleSheet.create({
     },
     submit_container:{
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
     }
 
 })
