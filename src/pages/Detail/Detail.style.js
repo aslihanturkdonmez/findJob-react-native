@@ -39,15 +39,32 @@ export default StyleSheet.create({
     scroll:{
         backgroundColor:'white',
         marginTop:15,
-        padding:7,
+        padding:10,
+        borderWidth:1,
+        margin:3,
     },
     button_container:{
         flexDirection:'row',
         justifyContent:'space-around',
-        padding: 10,
+        margin:10,
     },
     button_text:{
-        fontSize:20,
+        fontSize:22,
+        marginLeft:5,
+    },
+    button:{
+        flex:1,
+        padding:8,
+        borderRadius:8,
+        backgroundColor:'#E4A3AD',
+        flexDirection:'row',
+        margin:5,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    submit_container:{
+        flexDirection:'row',
+        alignItems:'center'
     }
 
 })

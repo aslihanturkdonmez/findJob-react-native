@@ -1,19 +1,23 @@
-import React,{useState} from 'react';
-import { View,Text, Dimensions, ActivityIndicator, ScrollView, Button, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View,Text, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import styles from './Detail.style';
 import useFetch from '../../hooks/useFetch';
 import Config from 'react-native-config';
 import RenderHTML from 'react-native-render-html';
 import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import FavIcon from '../../components/FavIcon';
 
 const Detail = ({route}) =>{
     const post_id=route.params.id;
     const {data, loading, error}=useFetch(Config.JOB_DETAILS_API_URL+post_id);
-    const {id, name, company, locations, levels}=data;
-
-    const added_fav=useSelector(state => state.favList.find(s=>s.id==id));
-    const dispatch = useDispatch();
-
+    const {id}=data;
+    const favFlag=useSelector(state => state.favList.find(s=>s.id==id));
+    
+    //const dispatch = useDispatch();
+    /* console.log(data);
     const addFav = () =>{
         dispatch({
             type:'ADD_FAV', 
@@ -27,10 +31,14 @@ const Detail = ({route}) =>{
     }
     const removeFav = () =>{
         dispatch({type:'REMOVE_FAV', payload:data.id})
-    }
+    } */
 
     if(loading){
-        return <ActivityIndicator size="large" />
+        return <Loading />
+    }
+
+    if(error){
+        return <Error />
     }
     return (
         <View style={styles.container}>
@@ -44,6 +52,7 @@ const Detail = ({route}) =>{
                 </Text>
             </View>
             <Text style={styles.content_title}>Job Detail</Text>
+            
             <ScrollView style={styles.scroll}>
                 <RenderHTML 
                     source={{html: data.contents}}
@@ -51,18 +60,39 @@ const Detail = ({route}) =>{
                 />
             </ScrollView>
             <View style={styles.button_container}>
-                <TouchableOpacity>
-                    <Text style={styles.button_text}>Submit</Text>
-                </TouchableOpacity>
-                {!added_fav ?
-                    <TouchableOpacity onPress={addFav}>
-                        <Text style={styles.button_text}>Favorite Job</Text>
+                <View style={styles.button}>
+                    <TouchableOpacity>
+                        <View style={styles.submit_container}>
+                            <Icon name="launch" size={27} color="#D33A58"  />
+                            <Text style={styles.button_text}>Submit</Text>
+                        </View>
                     </TouchableOpacity>
+                </View>
+                {!favFlag ?
+                <View style={styles.button}>
+                    <FavIcon 
+                        name_icon="favorite-border" 
+                        size={27} 
+                        color="#D33A58" 
+                        data={data} 
+                        method={true}
+                        title="Favorite Job"
+                    />
+                </View>
                 :
-                    <TouchableOpacity onPress={removeFav}>
-                        <Text style={styles.button_text}>Remove Favorite Job</Text>
-                    </TouchableOpacity>
+                <View style={styles.button}>
+                    <FavIcon 
+                        style={styles.button} 
+                        name_icon="favorite" 
+                        size={27} 
+                        color="#D33A58" 
+                        data={data} 
+                        method={false}
+                        title="Remove Fav"
+                    />
+                </View>
                 }
+                
             </View>
         </View>
     );
